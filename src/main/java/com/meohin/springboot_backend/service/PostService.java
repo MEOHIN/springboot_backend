@@ -31,4 +31,13 @@ public class PostService {
     public Post createPost(Post post) {
         return postRepository.save(post);
     }
+
+    // 게시글 수정
+    public Optional<Post> updatePost(Long id, Post updatedPost) {
+        return postRepository.findById(id).map(post -> {
+            post.setTitle(updatedPost.getTitle());
+            post.setContent(updatedPost.getContent());
+            return postRepository.save(post);
+        });
+    }
 }
