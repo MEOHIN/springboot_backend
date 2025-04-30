@@ -1,5 +1,7 @@
 package com.meohin.springboot_backend.service;
 
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -18,5 +20,10 @@ public class PostService {
     // 전체 게시글 조회 (페이지 처리)
     public Page<Post> getPosts(Pageable pageable) {
         return postRepository.findAll(pageable);
+    }
+
+    // 단일 게시글 조회
+    public Optional<Post> getPost(Long id) {
+        return postRepository.findById(id);
     }
 }
