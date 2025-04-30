@@ -40,4 +40,12 @@ public class PostService {
             return postRepository.save(post);
         });
     }
+
+    // 게시글 삭제
+    public boolean deletePost(Long id) {
+        return postRepository.findById(id).map(post -> {
+            postRepository.delete(post);
+            return true;
+        }).orElse(false);
+    }
 }
