@@ -1,10 +1,13 @@
 package com.meohin.springboot_backend.controller;
 
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,5 +30,13 @@ public class PostController {
         Pageable pageable = PageRequest.of(page, size);
         Page<Post> posts = postService.getPosts(pageable);
         return ResponseEntity.ok(posts);
+    }
+
+    // 게시글 단건 조회
+    @GetMapping("/{id}")
+    public ResponseEntity<Post> getPost(@PathVariable Long id) {
+        Optional<Post> postOpt = postService.getPost(id);
+        return postOpt.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }
