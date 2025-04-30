@@ -26,4 +26,9 @@ public class PostService {
     public Optional<Post> getPost(Long id) {
         return postRepository.findById(id);
     }
+
+    // 게시글 생성
+    public Post createPost(Post post) {
+        return postRepository.save(post);
+    }
 }
