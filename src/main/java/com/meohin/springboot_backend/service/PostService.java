@@ -1,0 +1,22 @@
+package com.meohin.springboot_backend.service;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import com.meohin.springboot_backend.model.Post;
+import com.meohin.springboot_backend.repository.PostRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class PostService {
+
+    private final PostRepository postRepository;
+
+    // 전체 게시글 조회 (페이지 처리)
+    public Page<Post> getPosts(Pageable pageable) {
+        return postRepository.findAll(pageable);
+    }
+}
